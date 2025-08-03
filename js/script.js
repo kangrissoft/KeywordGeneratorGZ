@@ -1,85 +1,83 @@
-class KeywordGenerator {
-    constructor() {
-        this.keywordTemplates = {
-            'digital marketing': ['SEO', 'PPC', 'social media', 'content marketing', 'email marketing', 'marketing strategy', 'digital advertising', 'online marketing', 'marketing automation', 'brand awareness'],
-            'healthy recipes': ['low calorie', 'vegetarian', 'gluten free', 'quick meals', 'meal prep', 'keto diet', 'vegan recipes', 'healthy snacks', 'protein rich', 'family friendly'],
-            'travel destinations': ['budget travel', 'adventure travel', 'luxury vacation', 'beach destinations', 'cultural tours', 'family travel', 'solo travel', 'romantic getaways', 'eco tourism', 'winter destinations'],
-            'technology': ['AI', 'machine learning', 'blockchain', 'cybersecurity', 'cloud computing', 'IoT', 'big data', 'software development', 'mobile apps', 'tech trends'],
-            'fitness': ['workout routines', 'home exercises', 'weight loss', 'muscle building', 'cardio training', 'yoga poses', 'fitness equipment', 'nutrition tips', 'personal training', 'sports nutrition']
-        };
+// script.js
 
-        this.initElements();
-        this.initEventListeners();
-        this.initDemo();
+document.addEventListener('DOMContentLoaded', function () {
+    // Predefined keyword templates for different categories
+    const keywordTemplates = {
+        'digital marketing': ['SEO', 'PPC', 'social media', 'content marketing', 'email marketing', 'marketing strategy', 'digital advertising', 'online marketing', 'marketing automation', 'brand awareness'],
+        'healthy recipes': ['low calorie', 'vegetarian', 'gluten free', 'quick meals', 'meal prep', 'keto diet', 'vegan recipes', 'healthy snacks', 'protein rich', 'family friendly'],
+        'travel destinations': ['budget travel', 'adventure travel', 'luxury vacation', 'beach destinations', 'cultural tours', 'family travel', 'solo travel', 'romantic getaways', 'eco tourism', 'winter destinations'],
+        'technology': ['AI', 'machine learning', 'blockchain', 'cybersecurity', 'cloud computing', 'IoT', 'big data', 'software development', 'mobile apps', 'tech trends'],
+        'fitness': ['workout routines', 'home exercises', 'weight loss', 'muscle building', 'cardio training', 'yoga poses', 'fitness equipment', 'nutrition tips', 'personal training', 'sports nutrition']
+    };
+
+    // DOM Elements
+    const topicInput = document.getElementById('topic');
+    const descriptionInput = document.getElementById('description');
+    const countInput = document.getElementById('count');
+    const generateBtn = document.getElementById('generateBtn');
+    const clearAllBtn = document.getElementById('clearAllBtn');
+    const copyAllBtn = document.getElementById('copyAllBtn');
+    const exportCsvBtn = document.getElementById('exportCsvBtn');
+    const exportTxtBtn = document.getElementById('exportTxtBtn');
+    const clearResultsBtn = document.getElementById('clearResultsBtn');
+    const resultsSection = document.getElementById('resultsSection');
+    const keywordsGrid = document.getElementById('keywordsGrid');
+    const totalKeywordsEl = document.getElementById('totalKeywords');
+    const longTailEl = document.getElementById('longTail');
+    const avgLengthEl = document.getElementById('avgLength');
+    const notification = document.getElementById('copiedNotification');
+
+    // Initialize with sample data for demo
+    function initDemo() {
+        topicInput.value = 'digital marketing';
+        descriptionInput.value = 'Learn effective strategies for online marketing and SEO optimization';
     }
 
-    initElements() {
-        this.topicInput = document.getElementById('topic');
-        this.descriptionInput = document.getElementById('description');
-        this.countInput = document.getElementById('count');
-        this.generateBtn = document.getElementById('generateBtn');
-        this.clearAllBtn = document.getElementById('clearAllBtn');
-        this.copyAllBtn = document.getElementById('copyAllBtn');
-        this.exportCsvBtn = document.getElementById('exportCsvBtn');
-        this.exportTxtBtn = document.getElementById('exportTxtBtn');
-        this.clearResultsBtn = document.getElementById('clearResultsBtn');
-        this.resultsSection = document.getElementById('resultsSection');
-        this.keywordsGrid = document.getElementById('keywordsGrid');
-        this.totalKeywordsEl = document.getElementById('totalKeywords');
-        this.longTailEl = document.getElementById('longTail');
-        this.avgLengthEl = document.getElementById('avgLength');
-        this.notification = document.getElementById('copiedNotification');
-    }
+    // Event Listeners
+    generateBtn.addEventListener('click', generateKeywords);
+    clearAllBtn.addEventListener('click', clearAll);
+    copyAllBtn.addEventListener('click', copyAllKeywords);
+    exportCsvBtn.addEventListener('click', () => exportKeywords('csv'));
+    exportTxtBtn.addEventListener('click', () => exportKeywords('txt'));
+    clearResultsBtn.addEventListener('click', clearResults);
 
-    initEventListeners() {
-        this.generateBtn.addEventListener('click', () => this.generateKeywords());
-        this.clearAllBtn.addEventListener('click', () => this.clearAll());
-        this.copyAllBtn.addEventListener('click', () => this.copyAllKeywords());
-        this.exportCsvBtn.addEventListener('click', () => this.exportKeywords('csv'));
-        this.exportTxtBtn.addEventListener('click', () => this.exportKeywords('txt'));
-        this.clearResultsBtn.addEventListener('click', () => this.clearResults());
-    }
-
-    initDemo() {
-        this.topicInput.value = 'digital marketing';
-        this.descriptionInput.value = 'Learn effective strategies for online marketing and SEO optimization';
-    }
-
-    generateKeywords() {
-        const topic = this.topicInput.value.trim();
-        const description = this.descriptionInput.value.trim();
-        const count = parseInt(this.countInput.value);
+    // Function to generate keywords based on topic
+    function generateKeywords() {
+        const topic = topicInput.value.trim();
+        const description = descriptionInput.value.trim();
+        const count = parseInt(countInput.value);
 
         if (!topic) {
             alert('Please enter a topic');
             return;
         }
 
-        let baseKeywords = this.getBaseKeywords(topic);
-        const keywords = this.generateKeywordSet(topic, baseKeywords, description, count);
-        this.displayKeywords(Array.from(keywords));
-    }
-
-    getBaseKeywords(topic) {
+        // Get base keywords
+        let baseKeywords = [];
         const lowerTopic = topic.toLowerCase();
-        for (const [key, keywords] of Object.entries(this.keywordTemplates)) {
+        // Check if we have templates for this topic
+        for (const [key, keywords] of Object.entries(keywordTemplates)) {
             if (lowerTopic.includes(key)) {
-                return [...keywords];
+                baseKeywords = [...keywords];
+                break;
             }
         }
-        return ['best', 'top', 'guide', 'tips', 'review', 'how to', 'what is', 'benefits of', 'vs', 'comparison'];
-    }
+        // If no specific template, generate generic keywords
+        if (baseKeywords.length === 0) {
+            baseKeywords = ['best', 'top', 'guide', 'tips', 'review', 'how to', 'what is', 'benefits of', 'vs', 'comparison'];
+        }
 
-    generateKeywordSet(topic, baseKeywords, description, count) {
+        // Generate keyword combinations
         const keywords = new Set();
+        // Add the main topic
         keywords.add(topic);
-
+        // Generate variations
         baseKeywords.forEach(keyword => {
             keywords.add(`${topic} ${keyword}`);
             keywords.add(`${keyword} ${topic}`);
             keywords.add(`${topic} for ${keyword}`);
         });
-
+        // Add long-tail keywords based on description
         if (description) {
             const descWords = description.split(' ').filter(word => word.length > 3);
             if (descWords.length > 0) {
@@ -93,15 +91,19 @@ class KeywordGenerator {
             }
         }
 
+        // Convert to array and limit to requested count
         let keywordArray = Array.from(keywords);
         if (keywordArray.length > count) {
-            keywordArray = this.shuffleArray(keywordArray).slice(0, count);
+            // Shuffle and take only the requested number
+            keywordArray = shuffleArray(keywordArray).slice(0, count);
         }
 
-        return new Set(keywordArray);
+        // Display results
+        displayKeywords(keywordArray);
     }
 
-    shuffleArray(array) {
+    // Function to shuffle array
+    function shuffleArray(array) {
         const newArray = [...array];
         for (let i = newArray.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -110,67 +112,73 @@ class KeywordGenerator {
         return newArray;
     }
 
-    displayKeywords(keywords) {
-        this.keywordsGrid.innerHTML = '';
+    // Function to display keywords
+    function displayKeywords(keywords) {
+        // Clear previous results
+        keywordsGrid.innerHTML = '';
 
+        // Add keywords to grid
         keywords.forEach(keyword => {
             const keywordElement = document.createElement('div');
             keywordElement.className = 'keyword-item';
             keywordElement.textContent = keyword;
-            keywordElement.addEventListener('click', () => this.copySingleKeyword(keyword));
-            this.keywordsGrid.appendChild(keywordElement);
+            keywordElement.addEventListener('click', () => copySingleKeyword(keyword));
+            keywordsGrid.appendChild(keywordElement);
         });
 
-        this.updateStatistics(keywords);
-        this.resultsSection.style.display = 'block';
-        this.resultsSection.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    updateStatistics(keywords) {
-        this.totalKeywordsEl.textContent = keywords.length;
+        // Update statistics
+        totalKeywordsEl.textContent = keywords.length;
         const longTailCount = keywords.filter(k => k.split(' ').length > 2).length;
-        this.longTailEl.textContent = longTailCount;
+        longTailEl.textContent = longTailCount;
         const averageLength = keywords.reduce((sum, k) => sum + k.length, 0) / keywords.length;
-        this.avgLengthEl.textContent = Math.round(averageLength);
+        avgLengthEl.textContent = Math.round(averageLength);
+
+        // Show results section
+        resultsSection.style.display = 'block';
+        // Scroll to results
+        resultsSection.scrollIntoView({ behavior: 'smooth' });
     }
 
-    async copySingleKeyword(text) {
+    // Function to copy a single keyword
+    async function copySingleKeyword(text) {
         try {
             await navigator.clipboard.writeText(text);
-            this.showCopiedNotification('Keyword copied to clipboard!');
+            showCopiedNotification('Keyword copied to clipboard!');
         } catch (err) {
             console.error('Failed to copy: ', err);
         }
     }
 
-    async copyAllKeywords() {
-        const keywords = Array.from(this.keywordsGrid.querySelectorAll('.keyword-item')).map(el => el.textContent);
+    // Function to copy all keywords
+    async function copyAllKeywords() {
+        const keywords = Array.from(keywordsGrid.querySelectorAll('.keyword-item')).map(el => el.textContent);
         if (keywords.length === 0) {
-            this.showCopiedNotification('No keywords to copy!');
+            showCopiedNotification('No keywords to copy!');
             return;
         }
-
         const allKeywordsText = keywords.join('\n');
         try {
             await navigator.clipboard.writeText(allKeywordsText);
-            this.showCopiedNotification(`Copied ${keywords.length} keywords to clipboard!`);
+            showCopiedNotification(`Copied ${keywords.length} keywords to clipboard!`);
         } catch (err) {
             console.error('Failed to copy: ', err);
         }
     }
 
-    showCopiedNotification(message) {
-        this.notification.textContent = message;
-        this.notification.classList.add('show');
+    // Function to show copied notification
+    function showCopiedNotification(message) {
+        notification.textContent = message;
+        notification.classList.add('show');
         setTimeout(() => {
-            this.notification.classList.remove('show');
+            notification.classList.remove('show');
         }, 3000);
     }
 
-    exportKeywords(format) {
-        const keywords = Array.from(this.keywordsGrid.querySelectorAll('.keyword-item')).map(el => el.textContent);
+    // Function to export keywords
+    function exportKeywords(format) {
+        const keywords = Array.from(keywordsGrid.querySelectorAll('.keyword-item')).map(el => el.textContent);
         if (keywords.length === 0) {
-            this.showCopiedNotification('No keywords to export!');
+            showCopiedNotification('No keywords to export!');
             return;
         }
 
@@ -185,6 +193,7 @@ class KeywordGenerator {
             mimeType = 'text/plain';
         }
 
+        // Create download link
         const blob = new Blob([content], { type: mimeType });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
@@ -195,22 +204,22 @@ class KeywordGenerator {
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
 
-        this.showCopiedNotification(`Exported ${keywords.length} keywords as ${format.toUpperCase()}!`);
+        showCopiedNotification(`Exported ${keywords.length} keywords as ${format.toUpperCase()}!`);
     }
 
-    clearAll() {
-        this.topicInput.value = '';
-        this.descriptionInput.value = '';
-        this.countInput.value = '20';
-        this.clearResults();
+    // Function to clear all inputs
+    function clearAll() {
+        topicInput.value = '';
+        descriptionInput.value = '';
+        countInput.value = '20';
+        clearResults();
     }
 
-    clearResults() {
-        this.resultsSection.style.display = 'none';
+    // Function to clear results
+    function clearResults() {
+        resultsSection.style.display = 'none';
     }
-}
 
-// Initialize the app when the DOM is fully loaded
-document.addEventListener('DOMContentLoaded', () => {
-    new KeywordGenerator();
+    // Initialize the demo
+    initDemo();
 });

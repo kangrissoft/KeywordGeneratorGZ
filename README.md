@@ -14,7 +14,7 @@ A simple and effective tool to generate relevant keywords for SEO, content creat
 
 ## Demo
 
-You can try the live demo [here](https://your-username.github.io/keyword-generator-tool).
+You can try the live demo [here](https://kangrissoft.github.io/KeywordGeneratorGZ/).
 
 ## Screenshots
 

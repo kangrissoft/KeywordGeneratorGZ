@@ -1,3 +1,5 @@
+/* styles.css */
+
 * {
     margin: 0;
     padding: 0;
@@ -16,6 +18,7 @@ body {
     margin: 0 auto;
 }
 
+/* Header Styles */
 header {
     text-align: center;
     padding: 40px 0;
@@ -35,6 +38,7 @@ h1 {
     margin: 0 auto;
 }
 
+/* Card Styles */
 .card {
     background: white;
     border-radius: 15px;
@@ -43,6 +47,7 @@ h1 {
     margin-bottom: 30px;
 }
 
+/* Input Section Styles */
 .input-section {
     display: flex;
     flex-direction: column;
@@ -60,8 +65,8 @@ label {
     color: #333;
 }
 
-textarea,
-input {
+input,
+textarea {
     padding: 15px;
     border: 2px solid #e1e5e9;
     border-radius: 10px;
@@ -69,8 +74,8 @@ input {
     transition: border-color 0.3s;
 }
 
-textarea:focus,
-input:focus {
+input:focus,
+textarea:focus {
     outline: none;
     border-color: #667eea;
 }
@@ -80,6 +85,7 @@ textarea {
     resize: vertical;
 }
 
+/* Button Styles */
 .button-group {
     display: flex;
     gap: 15px;
@@ -122,6 +128,7 @@ button:hover {
     background: #e9ecef;
 }
 
+/* Results Section Styles */
 .results-section {
     display: none;
 }
@@ -180,6 +187,7 @@ button:hover {
     transform: translateY(0);
 }
 
+/* Notification Styles */
 .copied-notification {
     position: fixed;
     top: 20px;
@@ -198,6 +206,7 @@ button:hover {
     transform: translateX(0);
 }
 
+/* Export Section Styles */
 .export-section {
     display: flex;
     gap: 15px;
@@ -216,6 +225,7 @@ button:hover {
     box-shadow: 0 10px 20px rgba(40, 167, 69, 0.3);
 }
 
+/* Statistics Styles */
 .stats {
     display: flex;
     gap: 30px;
@@ -240,6 +250,7 @@ button:hover {
     font-size: 0.9rem;
 }
 
+/* Footer Styles */
 footer {
     text-align: center;
     color: white;
@@ -247,6 +258,7 @@ footer {
     opacity: 0.8;
 }
 
+/* Responsive Styles */
 @media (max-width: 768px) {
     .keywords-grid {
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));

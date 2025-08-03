@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Keyword Generator Tool</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
     <div class="container">
@@ -13,29 +14,30 @@
             <p class="subtitle">Generate relevant keywords for SEO, content creation, and marketing campaigns</p>
         </header>
         <main>
-            <section class="card input-section">
-                <div class="input-group">
-                    <label for="topic">Enter your topic or main keyword:</label>
-                    <input type="text" id="topic" placeholder="e.g., digital marketing, healthy recipes, travel destinations">
+            <div class="card">
+                <div class="input-section">
+                    <div class="input-group">
+                        <label for="topic">Enter your topic or main keyword:</label>
+                        <input type="text" id="topic" placeholder="e.g., digital marketing, healthy recipes">
+                    </div>
+                    <div class="input-group">
+                        <label for="description">Describe your content (optional):</label>
+                        <textarea id="description" placeholder="Briefly describe what your content is about..."></textarea>
+                    </div>
+                    <div class="input-group">
+                        <label for="count">Number of keywords to generate:</label>
+                        <input type="number" id="count" min="5" max="100" value="20">
+                    </div>
+                    <div class="button-group">
+                        <button class="generate-btn" id="generateBtn">Generate Keywords</button>
+                        <button class="clear-btn" id="clearAllBtn">Clear All</button>
+                    </div>
                 </div>
-                <div class="input-group">
-                    <label for="description">Describe your content (optional):</label>
-                    <textarea id="description" placeholder="Briefly describe what your content is about..."></textarea>
-                </div>
-                <div class="input-group">
-                    <label for="count">Number of keywords to generate:</label>
-                    <input type="number" id="count" min="5" max="100" value="20">
-                </div>
-                <div class="button-group">
-                    <button class="generate-btn" id="generateBtn">Generate Keywords</button>
-                    <button class="clear-btn" id="clearAllBtn">Clear All</button>
-                </div>
-            </section>
-
-            <section class="card results-section" id="resultsSection">
+            </div>
+            <div class="card results-section" id="resultsSection">
                 <h2 class="section-title">
                     <span>Generated Keywords</span>
-                    <button class="clear-btn copy-all-btn" id="copyAllBtn">Copy All Keywords</button>
+                    <button class="clear-btn" id="copyAllBtn" style="padding: 8px 15px; font-size: 14px;">Copy All Keywords</button>
                 </h2>
                 <div class="stats">
                     <div class="stat-item">
@@ -57,18 +59,15 @@
                     <button class="export-btn" id="exportTxtBtn">Export as Text</button>
                     <button class="clear-btn" id="clearResultsBtn">Clear Results</button>
                 </div>
-            </section>
+            </div>
         </main>
-        
         <div class="copied-notification" id="copiedNotification">
             Keyword copied to clipboard!
         </div>
-        
         <footer>
             <p>Keyword Generator Tool &copy; 2025 | Generate SEO-friendly keywords in seconds</p>
         </footer>
     </div>
-    
     <script src="js/script.js"></script>
 </body>
 </html>

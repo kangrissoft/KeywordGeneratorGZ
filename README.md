@@ -18,7 +18,7 @@ You can try the live demo [here](https://your-username.github.io/keyword-generat
 
 ## Screenshots
 
-![Keyword Generator Tool Screenshot](/img/screenshot.png)
+![Keyword Generator Tool Screenshot](img/screenshot.PNG)
 
 ## Usage 
 
